@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - FallLevel
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2769242037
+    locked: 0
+  - name: Tilemap
+    uniqueID: 3835428753
+    locked: 0
+  - name: Props
+    uniqueID: 3999706637
+    locked: 0
+  - name: Platforms
+    uniqueID: 594081313
+    locked: 0
+  - name: Player and Enemies
+    uniqueID: 535326653
+    locked: 0
+  - name: Foreground
+    uniqueID: 2075644005
+    locked: 0
