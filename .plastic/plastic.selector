@@ -1,4 +1,0 @@
-repository "2D Platformer 20@X0j3m@cloud"
-  path "/"
-    br "/main"
-    co "/main"
