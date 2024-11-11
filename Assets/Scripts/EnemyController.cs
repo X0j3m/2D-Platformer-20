@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private bool isFacingRight = true;
+    private bool isFacingRight = false;
     private Animator animator;
-    [Range(0.01f, 20.0f)][SerializeField] private float moveSpeed = 0.1f; // moving speed of the player
-    [Range(0.01f, 20.0f)][SerializeField] private float moveRange = 0.1f; // moving speed of the player
+    [Range(0.01f, 20.0f)][SerializeField] private float moveSpeed = 0.1f; // moving speed of the enemy
+    [Range(0.01f, 20.0f)][SerializeField] private float moveRange = 1.0f; // moving range of the enemy
     private float startPositionX;
-    private bool isMovingRight=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +18,31 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.transform.position.x < )
+        if (isFacingRight)
+        {
+            if (this.transform.position.x < startPositionX + moveRange)
+            {
+                MoveRight();
+            }
+            else
+            {
+                Flip();
+                MoveLeft();
+            }
+        }
+        else
+        {
+            if(this.transform.position.x > startPositionX - moveRange)
+            {
+                MoveLeft();
+            }
+            else
+            {
+                Flip();
+                MoveRight();
+            }
+        }
+        
     }
 
     private void Awake()
