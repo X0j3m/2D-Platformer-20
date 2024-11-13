@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class EnemyController : MonoBehaviour
 {
@@ -68,5 +69,23 @@ public class EnemyController : MonoBehaviour
     void MoveLeft()
     {
         transform.Translate(-1 * moveSpeed * Time.deltaTime, 0.0f, 0.0f, Space.World);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (transform.position.y < collision.gameObject.transform.position.y) {
+                animator.SetBool("isDead",true);
+                StartCoroutine( KillOnAnimationEnd() );
+            }else{
+                Debug.Log("GAME OVER!");
+            }
+        }
+    }
+
+    IEnumerator KillOnAnimationEnd() {
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
     }
 }

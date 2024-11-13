@@ -7,6 +7,10 @@ TagManager:
   - FallLevel
   - Bonus
   - Ladder
+  - Enemy
+  - Key
+  - Heart
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

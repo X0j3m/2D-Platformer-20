@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private bool isLadder = false;
     private bool isClimbing=false;
     private float vertical=0.0f;
+    private int lives = 3;
+    private Vector2 startPosition;
+    private int keysFound = 0;
+    private const int keysNumber = 3;
     void Start()
     {
         
@@ -81,6 +85,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        startPosition = transform.position;
     }
     bool IsGrounded()
     {
@@ -109,11 +114,25 @@ private void OnTriggerEnter2D(Collider2D collision)
         
         if (collision.tag == "FallLevel")
         {
-            print("BGAME OVER");
-        } else
-        {
-            print("WIN OVER");
+            Debug.Log("BGAME OVER");
         }
+
+        if (collision.tag == "Finish")
+        {
+            if (keysFound == keysNumber)
+            {
+                Debug.Log("WIN OVER");
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("NEED KEYS");
+            }
+
+        }
+
+        
+
         if (collision.CompareTag("Bonus")){
             score += 10;
             collision.gameObject.SetActive(false);
@@ -122,7 +141,36 @@ private void OnTriggerEnter2D(Collider2D collision)
         if (collision.CompareTag("Ladder"))
         {
             isLadder = true;
-            
+        }
+        if (collision.CompareTag("Enemy"))
+        {
+            if (transform.position.y > collision.gameObject.transform.position.y) {
+                score += 50;
+                Debug.Log("Killed an enemy");
+            }else if(lives>1){
+                lives--;
+                Debug.Log(lives + " lives left");
+                transform.position = startPosition;
+            }else{
+                Debug.Log("GAME OVER!");
+                gameObject.SetActive(false);
+            }
+        }
+        if (collision.CompareTag("Key"))
+        {
+            keysFound++;
+            collision.gameObject.SetActive(false);
+            Debug.Log(keysFound + " keys found");
+        }
+        if (collision.CompareTag("Heart"))
+        {
+            lives ++;
+            collision.gameObject.SetActive(false);
+            Debug.Log(lives + " lives left");
+        }
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            transform.SetParent(collision.transform);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -132,6 +180,10 @@ private void OnTriggerEnter2D(Collider2D collision)
             isLadder = false;
             isClimbing = false;
 
+        }
+        if (collision.CompareTag("MovingPlatform"))
+        {
+            transform.SetParent(null);
         }
     }
 }
